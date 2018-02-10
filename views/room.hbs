@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{roomID}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/room.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <section>
+        <p>昵称: <span id="userName"></span></p>
+        <p>房间: {{roomID}}</p>
+        <p>当前在线人数: <span id="count">{{users.length}}</span></p>
+        <p>在线用户:  <div id="users">{{users}}</p>
+    </section>
+</body>
+</html>
