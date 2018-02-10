@@ -37,6 +37,15 @@ socketIO.on('connection', function (socket) {
     console.log(user + '加入了' + roomID);
   });
 
+  // 接收用户消息,发送相应的房间
+  socket.on('message', function (msg) {
+    // 验证如果用户不在房间内则不给发送
+    if (roomInfo[roomID].indexOf(user) === -1) {  
+      return false;
+    }
+    socketIO.to(roomID).emit('msg', user, msg);
+  });
+
   socket.on('leave', function () {
     socket.emit('disconnect');
   });
@@ -51,15 +60,6 @@ socketIO.on('connection', function (socket) {
     socket.leave(roomID);    // 退出房间
     socketIO.to(roomID).emit('sys', user + '退出了房间', roomInfo[roomID]);
     console.log(user + '退出了' + roomID);
-  });
-
-  // 接收用户消息,发送相应的房间
-  socket.on('message', function (msg) {
-    // 验证如果用户不在房间内则不给发送
-    if (roomInfo[roomID].indexOf(user) === -1) {  
-      return false;
-    }
-    socketIO.to(roomID).emit('msg', user, msg);
   });
 
 });
